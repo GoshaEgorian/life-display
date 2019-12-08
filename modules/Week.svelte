@@ -6,9 +6,9 @@
 
 <style>
   .week {
-    width: 15px;
-    height: 15px;
-    border: 1px soled grey;
+    width: 13px;
+    height: 13px;
+    border: 1px solid grey;
   }
   .done {
     background-color: grey;
