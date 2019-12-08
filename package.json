@@ -21,8 +21,10 @@
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.1",
     "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "svelte": "^3.16.0",
     "svelte-loader": "^2.13.6",
+    "terser-webpack-plugin": "^2.2.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0"
