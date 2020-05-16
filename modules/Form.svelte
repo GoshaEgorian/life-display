@@ -1,11 +1,12 @@
 <script>
   import {slide} from 'svelte/transition';
   import queryString from 'query-string';
-  import {createEventDispatcher} from 'svelte';
+  import {createEventDispatcher, onMount} from 'svelte';
 
   // Events
   const dispatch = createEventDispatcher();
   const dispatchShow = detail => dispatch('show', detail);
+  onMount(() => dispatchShow({birthDate, years}));
 
 
   // Reg exps
@@ -14,7 +15,7 @@
   };
 
 
-  // some of props
+  // props
   export let pageTitle;
 
 
@@ -26,7 +27,8 @@
   let birthDateSource = params.date || '';
   let birthDateIsFocused = false;
 
-  $: dateIncorrect = birthDateSource.length && !regExps.birthDate.test(birthDateSource);
+  $: dateIncorrect = !regExps.birthDate.test(birthDateSource);
+  $: inputIncorrect = birthDateSource.length && dateIncorrect;
   $: dateParsed = birthDateSource.split('.');
   $: birthDate = new Date(`${dateParsed[1]} ${dateParsed[0]}, ${dateParsed[2]}`);
 
@@ -48,7 +50,7 @@
 <form class="data" on:submit|preventDefault={handleSubmit}>
   <label class="label">
     <h3>Birth date:</h3>
-    <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:incorrect={dateIncorrect}>
+    <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:incorrect={inputIncorrect}>
     {#if birthDateIsFocused}
       <p transition:slide>Format: dd.mm.yyyy</p>
     {/if}
@@ -59,7 +61,7 @@
     <input type="number" min={0} bind:value={years}>
   </label>
 
-  <button type="submit" class="button">Show me!</button>
+  <button type="submit" class="button" disabled={dateIncorrect}>Show me!</button>
 </form>
 
 <style>
