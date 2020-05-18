@@ -2,13 +2,24 @@
   import Week from './Week.svelte';
   import Form from './Form.svelte';
 
+  // Constants
   const pageTitle = 'Life display';
-  const weeksAmount = 59;
-  const currentWeek = 31;
+  const weekLength = 1000 * 60 * 60 * 24 * 7;
 
+
+  // Main logic
   let years, birthDate;
-  const testLog = ({detail}) => console.log('Bang!');
-  // window.history.pushState({pageTitle}, "", `${window.location.origin}?test=${rand}`);
+  $: unsetted = years === undefined || birthDate === undefined || birthDate === null;
+  $: endDate = unsetted ? null : new Date(new Date(birthDate).setFullYear(birthDate.getFullYear() + years));
+  $: weeksAmount = unsetted ? 0 : Math.ceil((endDate - birthDate) / weekLength);
+  $: currentWeek = unsetted ? 0 : Math.ceil((new Date() - birthDate) / weekLength);
+
+
+  // Perform form actions
+  const handleShow = ({detail}) => {
+    years = +detail.years;
+    birthDate = detail.birthDate;
+  };
 </script>
 
 <svelte:head>
@@ -16,7 +27,7 @@
   <title>{pageTitle}</title>
 </svelte:head>
 
-<Form pageTitle on:show={testLog}/>
+<Form pageTitle on:show={handleShow}/>
 
 <section class={"calendar"}>
   {#each Array(weeksAmount) as _, i}
