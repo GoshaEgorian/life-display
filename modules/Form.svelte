@@ -1,6 +1,6 @@
 <script>
   import {slide} from 'svelte/transition';
-  import queryString from 'query-string';
+  import queryString from 'querystring';
   import {createEventDispatcher, onMount} from 'svelte';
 
   // Events
@@ -23,7 +23,7 @@
 
 
   // Query params
-  let params = queryString.parse(window.location.search);
+  let params = queryString.parse(window.location.search.slice(1));
 
 
   // Birth date
