@@ -14,7 +14,7 @@
 
   // Reg exps
   const regExps = {
-    birthDate: /\d{4}\.\d{1,2}\.\d{1,2}/,
+    birthDate: /\d{1,2}\.\d{1,2}\.\d{4}/,
   };
 
 
@@ -32,7 +32,7 @@
 
   $: dateIncorrect = !regExps.birthDate.test(birthDateSource);
   $: inputIncorrect = birthDateSource.length && dateIncorrect;
-  $: birthDate = new Date(birthDateSource.split('.').join('-'));
+  $: birthDate = new Date(birthDateSource.split('.').reverse().join('-'));
 
   const handleFocusIn = () => birthDateIsFocused = true;
   const handleFocusOut = () => birthDateIsFocused = false;
@@ -44,7 +44,10 @@
 
   // Form action
   const handleSubmit = () => {
-    window.history.pushState({pageTitle}, "", `${window.location.origin}?date=${birthDateSource}&years=${years}`);
+    if (window.location.protocol !== 'file:') {
+      window.history.pushState({pageTitle}, "", `${window.location.origin}?date=${birthDateSource}&years=${years}`);
+    }
+
     dispatchShow({birthDate, years});
   };
 </script>
@@ -54,7 +57,7 @@
     <h3>Birth date:</h3>
     <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:input--correct_false={inputIncorrect}>
     {#if birthDateIsFocused}
-      <p transition:slide>Format: yyyy.mm.dd</p>
+      <p transition:slide>Format: dd.mm.yyyy</p>
     {/if}
   </label>
 
