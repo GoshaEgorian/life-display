@@ -52,7 +52,7 @@
 <form class="data" on:submit|preventDefault={handleSubmit}>
   <label class="label">
     <h3>Birth date:</h3>
-    <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:incorrect={inputIncorrect}>
+    <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:input--correct_false={inputIncorrect}>
     {#if birthDateIsFocused}
       <p transition:slide>Format: yyyy.mm.dd</p>
     {/if}
@@ -76,7 +76,7 @@
     display: block;
   }
 
-  .incorrect {
+  .input--correct_false {
     border-color: tomato;
   }
 </style>

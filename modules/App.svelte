@@ -41,7 +41,8 @@
   .calendar {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 3px;
   }
 </style>
