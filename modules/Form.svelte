@@ -6,12 +6,15 @@
   // Events
   const dispatch = createEventDispatcher();
   const dispatchShow = detail => dispatch('show', detail);
-  onMount(() => dispatchShow({birthDate, years}));
+  onMount(() => dispatchShow({
+    birthDate: dateIncorrect ? null : birthDate,
+    years,
+  }));
 
 
   // Reg exps
   const regExps = {
-    birthDate: /\d{2}\.\d{2}\.\d{4}/,
+    birthDate: /\d{4}\.\d{1,2}\.\d{1,2}/,
   };
 
 
@@ -29,8 +32,7 @@
 
   $: dateIncorrect = !regExps.birthDate.test(birthDateSource);
   $: inputIncorrect = birthDateSource.length && dateIncorrect;
-  $: dateParsed = birthDateSource.split('.');
-  $: birthDate = new Date(`${dateParsed[1]} ${dateParsed[0]}, ${dateParsed[2]}`);
+  $: birthDate = new Date(birthDateSource.split('.').join('-'));
 
   const handleFocusIn = () => birthDateIsFocused = true;
   const handleFocusOut = () => birthDateIsFocused = false;
@@ -52,7 +54,7 @@
     <h3>Birth date:</h3>
     <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:incorrect={inputIncorrect}>
     {#if birthDateIsFocused}
-      <p transition:slide>Format: dd.mm.yyyy</p>
+      <p transition:slide>Format: yyyy.mm.dd</p>
     {/if}
   </label>
 
