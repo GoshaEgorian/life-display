@@ -1,10 +1,10 @@
 <script>
   import Week from './Week.svelte';
   import Form from './Form.svelte';
+  import {weekLength} from '../js/constants';
 
   // Constants
   const pageTitle = 'Life display';
-  const weekLength = 1000 * 60 * 60 * 24 * 7;
 
 
   // Main logic
