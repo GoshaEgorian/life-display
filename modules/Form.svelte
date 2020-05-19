@@ -2,6 +2,7 @@
   import {slide} from 'svelte/transition';
   import queryString from 'querystring';
   import {createEventDispatcher, onMount} from 'svelte';
+  import {path} from '../js/constants';
 
   // Events
   const dispatch = createEventDispatcher();
@@ -45,7 +46,7 @@
   // Form action
   const handleSubmit = () => {
     if (window.location.protocol !== 'file:') {
-      window.history.pushState({pageTitle}, "", `${window.location.origin}?date=${birthDateSource}&years=${years}`);
+      window.history.pushState({pageTitle}, "", `${path}?date=${birthDateSource}&years=${years}`);
     }
 
     dispatchShow({birthDate, years});
