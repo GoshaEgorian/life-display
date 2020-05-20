@@ -1,8 +1,9 @@
 <script>
-  export let done = false;
+  let done = false, className = '';
+  export {done, className as class};
 </script>
 
-<div class={"week"} class:week--done_true={done}></div>
+<div class="week {className}" class:week--done_true={done}></div>
 
 <style>
   .week {

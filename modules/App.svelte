@@ -27,22 +27,37 @@
   <title>{pageTitle}</title>
 </svelte:head>
 
-<Form pageTitle on:show={handleShow}/>
+<div class="app">
+  <Form pageTitle on:show={handleShow} class={"form"}/>
 
-<section class={"calendar"}>
-  {#each Array(weeksAmount) as _, i}
-    <Week done={i+1 <= currentWeek} />
-  {/each}
-</section>
+  <section class={"calendar"}>
+    {#each Array(weeksAmount) as _, i}
+      <Week done={i+1 <= currentWeek} class="calendar__item"/>
+    {/each}
+  </section>
+</div>
 
 <style>
   @import "../node_modules/normalize.css";
+
+  :global(body) {
+    padding: 10px;
+    min-width: 435px;
+    box-sizing: border-box;
+  }
+
+  .app :global(.form) {
+    margin-bottom: 10px;
+  }
 
   .calendar {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
-    gap: 3px;
+  }
+
+  .calendar :global(.calendar__item) {
+    margin: 0 3px 3px 0;
   }
 </style>

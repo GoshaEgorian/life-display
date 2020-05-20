@@ -1,5 +1,4 @@
 <script>
-  import {slide} from 'svelte/transition';
   import queryString from 'querystring';
   import {createEventDispatcher, onMount} from 'svelte';
   import {path} from '../js/constants';
@@ -21,6 +20,8 @@
 
   // props
   export let pageTitle;
+  let className = '';
+  export {className as class};
 
 
   // Query params
@@ -46,41 +47,65 @@
   // Form action
   const handleSubmit = () => {
     if (window.location.protocol !== 'file:') {
-      window.history.pushState({pageTitle}, "", `${path}?date=${birthDateSource}&years=${years}`);
+      window.history.pushState({pageTitle}, "", `${path}?${queryString.encode({date: birthDateSource, years})}`);
     }
 
     dispatchShow({birthDate, years});
   };
 </script>
 
-<form class="data" on:submit|preventDefault={handleSubmit}>
-  <label class="label">
-    <h3>Birth date:</h3>
-    <input type="text" on:focusin={handleFocusIn} on:focusout={handleFocusOut} bind:value={birthDateSource} class:input--correct_false={inputIncorrect}>
-    {#if birthDateIsFocused}
-      <p transition:slide>Format: dd.mm.yyyy</p>
-    {/if}
+<form class="data {className}" on:submit|preventDefault={handleSubmit}>
+  <label class="data__item">
+    <h3 class="data__title">Birth date:</h3>
+    <input
+      type="text"
+      on:focusin={handleFocusIn}
+      on:focusout={handleFocusOut}
+      bind:value={birthDateSource}
+      class:input--correct_false={inputIncorrect}
+      placeholder="dd.mm.yyyy"
+    >
   </label>
 
-  <label class="label">
-    <h3>Years to show:</h3>
-    <input type="number" min={0} bind:value={years}>
+  <label class="data__item">
+    <h3 class="data__title">Years to show:</h3>
+    <input type="number" min={0}>
   </label>
 
   <button type="submit" class="button" disabled={dateIncorrect}>Show me!</button>
 </form>
 
 <style>
-  .label {
-    display: block;
+  .data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  .button {
-    margin-top: 10px;
-    display: block;
+  .data__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .data__title {
+    margin: 0 5px 0 0;
   }
 
   .input--correct_false {
-    border-color: tomato;
+    border: 2px inset tomato;
+    border-radius: 0.35em;
+  }
+
+  @media (min-width: 950px) {
+    .data {
+      margin: 0 auto;
+      flex-direction: row;
+      justify-content: space-around;
+      max-width: 950px;
+    }
+
+    .data__item {
+      margin-bottom: 0;
+    }
   }
 </style>
