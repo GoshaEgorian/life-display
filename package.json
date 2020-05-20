@@ -1,5 +1,5 @@
 {
-  "name": "svelte-training",
+  "name": "life-display",
   "version": "0.0.5",
   "scripts": {
     "test": "test",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "svelte",
-    "training"
+    "life"
   ],
   "author": "George Egorian",
   "license": "MIT",
