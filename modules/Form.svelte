@@ -46,7 +46,7 @@
   // Form action
   const handleSubmit = () => {
     if (window.location.protocol !== 'file:') {
-      window.history.pushState({pageTitle}, "", `${path}?date=${birthDateSource}&years=${years}`);
+      window.history.pushState({pageTitle}, "", `${path}?${queryString.encode({date: birthDateSource, years})}`);
     }
 
     dispatchShow({birthDate, years});
