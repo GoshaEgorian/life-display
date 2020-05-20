@@ -42,12 +42,13 @@
 
   // Years
   let years = params.years || 1;
+  console.log(years);
 
 
   // Form action
   const handleSubmit = () => {
     if (window.location.protocol !== 'file:') {
-      window.history.pushState({pageTitle}, "", `${path}?${queryString.encode({date: birthDateSource, years})}`);
+      window.history.pushState({pageTitle}, "", `${path}?${queryString.encode({date: birthDateSource, years: years})}`);
     }
 
     dispatchShow({birthDate, years});
@@ -69,7 +70,7 @@
 
   <label class="data__item">
     <h3 class="data__title">Years to show:</h3>
-    <input type="number" min={0}>
+    <input type="number" min={0} bind:value={years}>
   </label>
 
   <button type="submit" class="button" disabled={dateIncorrect}>Show me!</button>
