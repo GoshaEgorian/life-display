@@ -1,6 +1,6 @@
 {
-  "name": "svelte-training",
-  "version": "0.0.5",
+  "name": "life-display",
+  "version": "1.0.0",
   "scripts": {
     "test": "test",
     "build": "webpack",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "svelte",
-    "training"
+    "life"
   ],
   "author": "George Egorian",
   "license": "MIT",
