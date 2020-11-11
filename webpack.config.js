@@ -35,9 +35,9 @@ module.exports = {
       chunkFilename: '[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
-    new CopyPlugin([
-      { from: 'index.html', to: '.' },
-    ]),
+    new CopyPlugin({
+      patterns: [{ from: 'index.html', to: '.' }],
+    }),
   ],
   optimization: {
     minimizer: [

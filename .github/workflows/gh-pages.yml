@@ -23,7 +23,7 @@ jobs:
             ${{ runner.os }}-${{ env.cache-name }}-
 
       - name: Install # This project is built using npm and outputs the result to the 'dist' folder.
-        run: npm i
+        run: npm ci
 
       - name: Build
         run: npm run build
