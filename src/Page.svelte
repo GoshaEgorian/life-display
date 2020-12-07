@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import Week from './Week.svelte';
   import Form from './Form.svelte';
-  import {weekLength} from '../js/constants';
+  import {weekLength} from './utils/constants';
 
   // Constants
   const pageTitle = 'Life display';
@@ -23,7 +23,6 @@
 </script>
 
 <svelte:head>
-  <link rel="stylesheet" href="./index.css">
   <title>{pageTitle}</title>
 </svelte:head>
 
@@ -38,8 +37,6 @@
 </div>
 
 <style>
-  @import "../node_modules/normalize.css";
-
   :global(body) {
     padding: 10px;
     min-width: 435px;

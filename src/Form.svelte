@@ -1,7 +1,7 @@
 <script>
   import queryString from 'querystring';
   import {createEventDispatcher, onMount} from 'svelte';
-  import {path} from '../js/constants';
+  import {path} from './utils/constants';
 
   // Events
   const dispatch = createEventDispatcher();
