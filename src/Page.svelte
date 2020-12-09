@@ -8,18 +8,21 @@
   const pageTitle = "Life display";
 
   // Main logic
-  let years: number, birthDate: Date;
-  $: unsetted =
-    years === undefined || birthDate === undefined || birthDate === null;
-  $: endDate = unsetted
-    ? null
-    : new Date(
-        new Date(birthDate).setFullYear(birthDate.getFullYear() + years)
-      );
-  $: weeksAmount = unsetted ? 0 : Math.ceil((+endDate - +birthDate) / weekLength);
-  $: currentWeek = unsetted
-    ? 0
-    : Math.ceil((+new Date() - +birthDate) / weekLength);
+  let years: number, birthDate: Date | null;
+  $: endDate =
+    years === undefined || birthDate === undefined || birthDate === null
+      ? null
+      : new Date(
+          new Date(birthDate).setFullYear(birthDate.getFullYear() + years)
+        );
+  $: weeksAmount =
+    years === undefined || birthDate === undefined || birthDate === null || endDate === null
+      ? 0
+      : Math.ceil((+endDate - +birthDate) / weekLength);
+  $: currentWeek =
+    years === undefined || birthDate === undefined || birthDate === null
+      ? 0
+      : Math.ceil((+new Date() - +birthDate) / weekLength);
 
   // Perform form actions
   const handleShow: (data: { detail: Settings }) => void = ({ detail }) => {
@@ -56,7 +59,7 @@
 </svelte:head>
 
 <div class="app">
-  <Form pageTitle={pageTitle} on:show={handleShow} class={'form'} />
+  <Form {pageTitle} on:show={handleShow} class={'form'} />
 
   <section class={'calendar'}>
     {#each Array(weeksAmount) as _, i}

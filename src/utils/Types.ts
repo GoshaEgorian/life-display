@@ -1,5 +1,5 @@
 export interface Settings {
-  birthDate: Date,
+  birthDate: Date | null,
   years: number,
 };
 
