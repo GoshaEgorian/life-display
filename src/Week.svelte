@@ -1,5 +1,5 @@
-<script>
-  let done = false, className = '';
+<script lang="ts">
+  let done: boolean, className = '';
   export {done, className as class};
 </script>
 
