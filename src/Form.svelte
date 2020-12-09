@@ -2,7 +2,7 @@
   import queryString from "querystring";
   import { createEventDispatcher, onMount } from "svelte";
   import { path } from "./utils/constants";
-  import type { QueryObject, Settings } from "./utils/Settings";
+  import type { QueryObject, Settings } from "./utils/Types";
 
   // Events
   const dispatch = createEventDispatcher();
